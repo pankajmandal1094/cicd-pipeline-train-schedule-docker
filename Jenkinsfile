@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
+                echo "Running build automation"
+                sh './gradelw build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
@@ -27,8 +27,8 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com','docker_hub_login') {
-                        app.puch("${env.BUILD_NUMBER}")
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                        app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
                 }
